@@ -8,3 +8,11 @@ Antonio Lopez | Back-end | antonio-lopez
 Javier Melendrez | Back-end | javimelendrez
 Brianna Sharpe | Front-end | briannasharpe
 Jose Alvarado | Front-end | Jalvarado115
+
+
+### Run
+
+```
+$ export FLASK_APP=listo.py
+$ flask run
+```
