@@ -133,3 +133,8 @@
     margin-bottom: 40px;
     color: white;
 }
+
+.auth-button:hover {
+    background: white;
+    color: black;
+}

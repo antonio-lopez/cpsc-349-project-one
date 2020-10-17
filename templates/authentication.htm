@@ -13,17 +13,17 @@
         <div class="form" id="shadow">
             <div class="quickboard">quickboard</div>
             <form class="register-form">
-                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Username" minlength="3" maxlength="20">
                 <input type="password" placeholder="Password">
                 <input type="email" placeholder="Email">
-                <button type="button" id="shadow">Register</button>
+                <button type="button" class="auth-button" id="shadow">Register</button>
                 <p class="message">Already Resistered? <a href="#">Login</a></p>
             </form>
 
             <form class="login-form">
-                <input type="text" placeholder="Username">
+                <input type="text" placeholder="Username" minlength="3" maxlength="20">
                 <input type="password" placeholder="Password">
-                <button type="button" id="shadow">Login</button>
+                <button type="button" class="auth-button" id="shadow">Login</button>
                 <p class="message">Don't have an account? <a href="#">Register</a></p>
             </form>
         </div>
