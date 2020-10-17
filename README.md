@@ -16,6 +16,8 @@ Download or clone the repo
 
 Extract folder
 
+Make sure Docker is running in the background
+
 Open the folder that is within the extracted folder in VS Code 
 
 Example: `cpsc-349-project-one-antonio\cpsc-349-project-one-antonio`
