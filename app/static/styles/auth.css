@@ -116,10 +116,6 @@ img {
     text-decoration: none;
 }
 
-.register-form {
-    display: none;
-}
-
 #shadow {
     -webkit-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.75);

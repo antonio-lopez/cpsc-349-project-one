@@ -9,7 +9,7 @@ from werkzeug.urls import url_parse
 @app.route('/index')
 @login_required
 def index():
-    return render_template('example-page.html', title='Home Page')
+    return render_template('homepage.html', title='Home Page')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
