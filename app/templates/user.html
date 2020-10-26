@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <span class="title">{{ user.username }}</span>
+
+        <div class="header-buttons">
+            <form>
+                <button class="title-button" formaction="settings.html">settings</button>
+                <button class="title-button" formaction="homepage.html">log out</button>
+            </form>
+        </div> <!-- header-buttons -->
+    </div> <!-- header -->
+
+
+
+</div> <!-- container -->
+{% endblock %}
