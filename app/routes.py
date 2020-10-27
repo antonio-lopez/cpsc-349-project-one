@@ -1,10 +1,16 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfilePostForm, PostForm
+from app.forms import LoginForm, RegistrationForm, EditPostForm, PostForm
 from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
+
+# route to test render html pages
+@app.route('/render_me')
+def render_me():
+    return render_template('base2.html')
+
 
 @app.route('/')
 @app.route('/index')
@@ -52,26 +58,24 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    # posts = [
-    #     {'author': user, 'body': 'Test post #1'},
-    #     {'author': user, 'body': 'Test post #2'}
-    # ]
     posts = user.posts.order_by(Post.timestamp.desc())
     return render_template('user.html', user=user, posts=posts)
 
-@app.route('/edit_list', methods=['GET', 'POST'])
+@app.route('/edit_list/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_list():
-    form = EditProfilePostForm()
+def edit_list(id):
+    form = EditPostForm()
+    post = PostForm()
+    username = current_user.username
+    post = Post.query.filter_by(id=id).first_or_404()
     if form.validate_on_submit():
-        current_user.title = form.title.data
-        current_user.body = form.body.data
+        post.title = form.title.data
+        post.body = form.body.data
         db.session.commit()
-        flash('Your changes have been saved.')
-        return redirect(url_for('edit_list'))
+        return redirect(url_for('user', username=username))
     elif request.method == 'GET':
-        form.title.data = current_user.title
-        form.body.data = current_user.body
+        form.title.data = post.title
+        form.body.data = post.body
     return render_template('edit_list.html', title='Edit List',
                            form=form)
 

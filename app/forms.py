@@ -32,7 +32,7 @@ class PostForm(FlaskForm):
     body = TextAreaField('Express Yourself', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')
 
-class EditProfilePostForm(FlaskForm):
+class EditPostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     body = TextAreaField('Express Yourself', validators=[Length(min=0, max=140)])
     submit = SubmitField('Submit')

@@ -1,6 +1,6 @@
 <!-- base template for posts which will be reference in the user.html file -->
 <div class="list-box">
-    <center><p><a href="edit_list.html" class="list-title" title="edit list">{{ post.title }}</a></p></center>
+    <center><p><a href="{{ url_for('edit_list', id=post.id) }}" class="list-title" title="edit list">{{ post.title }}</a></p></center>
     <!-- list box template -->
     {{ post.body }}
 </div>
