@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfilePostForm
-from app.models import User
+from app.forms import LoginForm, RegistrationForm, EditProfilePostForm, PostForm
+from app.models import User, Post
 from werkzeug.urls import url_parse
 
 @app.route('/')
@@ -51,10 +51,11 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    # posts = [
+    #     {'author': user, 'body': 'Test post #1'},
+    #     {'author': user, 'body': 'Test post #2'}
+    # ]
+    posts = user.posts
     return render_template('user.html', user=user, posts=posts)
 
 @app.route('/edit_list', methods=['GET', 'POST'])
@@ -71,4 +72,17 @@ def edit_list():
         form.title.data = current_user.title
         form.body.data = current_user.body
     return render_template('edit_list.html', title='Edit List',
+                           form=form)
+
+@app.route('/new_list', methods=['GET', 'POST'])
+@login_required
+def new_list():
+    form = PostForm()
+    username = current_user.username
+    if form.validate_on_submit():
+        post = Post(title=form.title.data, body=form.body.data, user_id=current_user.id)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('user', username=username)) # redirect to user profile and pass current username
+    return render_template('add_list.html', title='New Post', user=user, 
                            form=form)
