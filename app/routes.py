@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app import app, db
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, EditProfilePostForm
 from app.models import User
 from werkzeug.urls import url_parse
 
@@ -56,3 +56,19 @@ def user(username):
         {'author': user, 'body': 'Test post #2'}
     ]
     return render_template('user.html', user=user, posts=posts)
+
+@app.route('/edit_list', methods=['GET', 'POST'])
+@login_required
+def edit_list():
+    form = EditProfilePostForm()
+    if form.validate_on_submit():
+        current_user.title = form.title.data
+        current_user.body = form.body.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('edit_list'))
+    elif request.method == 'GET':
+        form.title.data = current_user.title
+        form.body.data = current_user.body
+    return render_template('edit_list.html', title='Edit List',
+                           form=form)
