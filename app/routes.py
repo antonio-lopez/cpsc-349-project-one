@@ -4,6 +4,7 @@ from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfilePostForm, PostForm
 from app.models import User, Post
 from werkzeug.urls import url_parse
+from datetime import datetime
 
 @app.route('/')
 @app.route('/index')
@@ -55,7 +56,7 @@ def user(username):
     #     {'author': user, 'body': 'Test post #1'},
     #     {'author': user, 'body': 'Test post #2'}
     # ]
-    posts = user.posts
+    posts = user.posts.order_by(Post.timestamp.desc())
     return render_template('user.html', user=user, posts=posts)
 
 @app.route('/edit_list', methods=['GET', 'POST'])

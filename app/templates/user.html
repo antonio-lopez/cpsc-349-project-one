@@ -16,10 +16,11 @@
     </div> <!-- header -->
 
 
-
-    {% for post in posts %}
-    {% include '_post.html' %}
-    {% endfor %}
+    <div class="board-grid">
+        {% for post in posts %}
+        {% include '_post.html' %}
+        {% endfor %}
+    </div>
 
     <a href="{{ url_for('new_list') }}">New List</a>
 
