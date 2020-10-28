@@ -16,7 +16,12 @@ def render_me():
 @app.route('/index')
 @login_required
 def index():
-    return render_template('homepage.html', title='Home Page')
+    user = User.query.limit(3).all()
+    # posts = user.posts.order_by(Post.timestamp.desc())
+    # user = User.query.order_by(User.username).all()
+    # user = User.query.all()
+    # posts = user.posts.query.all()
+    return render_template('home.html', title='Home Page', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -91,3 +96,12 @@ def new_list():
         return redirect(url_for('user', username=username)) # redirect to user profile and pass current username
     return render_template('add_list.html', title='New Post', user=user, 
                            form=form)
+
+@app.route('/delete/<int:id>')
+@login_required
+def delete_post(id):
+    username = current_user.username
+    post = Post.query.get_or_404(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('user', username=username))

@@ -3,13 +3,33 @@
 
 <div class="container">
     <div class="header">
-        <span class="title">quickboard</span>
-            
-        <div class="header-buttons"><form>
-            <button class="title-button" formaction="authentication.html">sign up</button>
-            <button class="title-button" formaction="authentication.html">log in</button>
-        </form></div> <!-- header-buttons -->
+        <span class="title">Welcome</span>
     </div> <!-- header -->
+
+    <div class="home-text-box">
+        <p class="home-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis nisi feugiat, luctus orci eget, sodales elit. Cras pharetra urna felis. Proin congue dui felis, quis commodo purus tristique nec. Mauris vulputate elit dolor. In ac varius turpis, ac varius dolor. In blandit, enim non ultricies pretium, risus lorem rhoncus diam, non aliquet diam dui a dolor. Morbi rhoncus arcu arcu, at mattis mi aliquam non. Duis sed tortor porttitor, dapibus leo vestibulum, placerat sem. Etiam aliquam justo a leo iaculis, eu malesuada enim laoreet. Morbi elit leo, pulvinar vitae nisl quis, faucibus iaculis purus.<br><br>
+        
+        What our users have made...
+        </p>
+    </div>
+
+    {% for users in user %}
+    <div class="random-spotlight">
+        <div class="rs-user">
+            <h1 class="display-4"><i class="fas fa-user-circle"></i>  {{users.username}}</h1>
+        </div> <!-- rs-user -->
+        
+        <div class="rs-content">
+            <div class="rs-header" style="background-color: #5c4033"><span class="rs-title">welsh corgi</span></div>
+            <div class="rs-list-box">
+                {% for post in posts %}
+                    {{users.posts}}
+                {% endfor %}
+    
+            </div> <!-- list-box -->
+        </div><!-- rs-content -->
+    </div> <!-- random-spotlight -->
+    {% endfor %}
 
     
 
