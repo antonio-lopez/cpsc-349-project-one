@@ -7,31 +7,12 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from  sqlalchemy.sql.expression import func
 
-# route to test render html pages
-@app.route('/render_me')
-def render_me():
-    return render_template('base2.html')
-
-
 @app.route('/')
 @app.route('/index')
 @login_required
 def index():
-    # user = User.query.limit(3).all()
     user = User.query.order_by(func.random()).limit(4)
-    # posts = user.posts.order_by(Post.timestamp.desc())
-    # user = User.query.order_by(User.username).all()
-    # user = User.query.all()
-    # posts = user.posts.query.all()
-    # username = user.username
-    # user_select = User.query.order_by(func.rand(username=username))
-
-
-    username = current_user.username
-    user_select = User.query.filter_by(username=username).first_or_404()
-    posts = user_select.posts.limit(3).all()
-
-    return render_template('home.html', title='Home Page', user=user, posts=posts)
+    return render_template('home.html', title='Home Page', user=user)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
