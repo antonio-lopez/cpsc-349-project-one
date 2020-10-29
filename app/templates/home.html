@@ -7,31 +7,45 @@
     </div> <!-- header -->
 
     <div class="home-text-box">
-        <p class="home-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis nisi feugiat, luctus orci eget, sodales elit. Cras pharetra urna felis. Proin congue dui felis, quis commodo purus tristique nec. Mauris vulputate elit dolor. In ac varius turpis, ac varius dolor. In blandit, enim non ultricies pretium, risus lorem rhoncus diam, non aliquet diam dui a dolor. Morbi rhoncus arcu arcu, at mattis mi aliquam non. Duis sed tortor porttitor, dapibus leo vestibulum, placerat sem. Etiam aliquam justo a leo iaculis, eu malesuada enim laoreet. Morbi elit leo, pulvinar vitae nisl quis, faucibus iaculis purus.<br><br>
-        
-        What our users have made...
+        <p class="home-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus venenatis nisi feugiat,
+            luctus orci eget, sodales elit. Cras pharetra urna felis. Proin congue dui felis, quis commodo purus
+            tristique nec. Mauris vulputate elit dolor. In ac varius turpis, ac varius dolor. In blandit, enim non
+            ultricies pretium, risus lorem rhoncus diam, non aliquet diam dui a dolor. Morbi rhoncus arcu arcu, at
+            mattis mi aliquam non. Duis sed tortor porttitor, dapibus leo vestibulum, placerat sem. Etiam aliquam justo
+            a leo iaculis, eu malesuada enim laoreet. Morbi elit leo, pulvinar vitae nisl quis, faucibus iaculis
+            purus.<br><br>
+
+            What our users have made...
         </p>
     </div>
 
     {% for users in user %}
     <div class="random-spotlight">
-        <div class="rs-user">
-            <h1 class="display-4"><i class="fas fa-user-circle"></i>  {{users.username}}</h1>
-        </div> <!-- rs-user -->
-        
+
+
         <div class="rs-content">
-            <div class="rs-header" style="background-color: #5c4033"><span class="rs-title">welsh corgi</span></div>
+            <div class="rs-header" style="background-color: #5c4033">
+                <a href="{{ url_for('user_explore', username=users.username) }}">
+                    <h1 class="display-4"><i class="fas fa-user-circle"></i>
+                    <span class="rs-title" >{{users.username}}</span>
+                </a>
+            </div>
+            {% for post in posts %}
             <div class="rs-list-box">
-                {% for post in posts %}
-                    {{users.posts}}
-                {% endfor %}
-    
+                <p>
+                    <center style="background-color: #62C370;">{{ post.title }}</center>
+                </p>
+                <p style="white-space: pre-line;">
+                    {{ post.body }}
+                </p>
             </div> <!-- list-box -->
+            {% endfor %}
         </div><!-- rs-content -->
+
     </div> <!-- random-spotlight -->
     {% endfor %}
 
-    
+
 
 </div> <!-- container -->
 {% endblock %}

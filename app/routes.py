@@ -5,6 +5,7 @@ from app.forms import LoginForm, RegistrationForm, EditPostForm, PostForm
 from app.models import User, Post
 from werkzeug.urls import url_parse
 from datetime import datetime
+from  sqlalchemy.sql.expression import func
 
 # route to test render html pages
 @app.route('/render_me')
@@ -16,12 +17,21 @@ def render_me():
 @app.route('/index')
 @login_required
 def index():
-    user = User.query.limit(3).all()
+    # user = User.query.limit(3).all()
+    user = User.query.order_by(func.random()).limit(4)
     # posts = user.posts.order_by(Post.timestamp.desc())
     # user = User.query.order_by(User.username).all()
     # user = User.query.all()
     # posts = user.posts.query.all()
-    return render_template('home.html', title='Home Page', user=user)
+    # username = user.username
+    # user_select = User.query.order_by(func.rand(username=username))
+
+
+    username = current_user.username
+    user_select = User.query.filter_by(username=username).first_or_404()
+    posts = user_select.posts.limit(3).all()
+
+    return render_template('home.html', title='Home Page', user=user, posts=posts)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -105,3 +115,10 @@ def delete_post(id):
     db.session.delete(post)
     db.session.commit()
     return redirect(url_for('user', username=username))
+
+@app.route('/explore/<username>')
+@login_required
+def user_explore(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = user.posts.order_by(Post.timestamp.desc())
+    return render_template('user_explore.html', user=user, posts=posts)
