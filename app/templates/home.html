@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div class="header">
+        <span class="title">Listo</span>
+    </div> <!-- header -->
+
+    <div class="home-text-box">
+        <p class="home-text"><br>Welcome to Listo - Discover new users and enjoying viewing their lists.<br><br></p>
+    </div>
+
+    {% for users in user %}
+    <div class="random-spotlight">
+        <div class="rs-content">
+            <div class="rs-list-box" style="background-color: #62C370;">
+                <a href="{{ url_for('user_explore', username=users.username) }}">
+                    <center>
+                        <h1 class="display-4"><i class="fas fa-user-circle"></i></h1>
+                        <span class="rs-title">{{users.username}}</span>
+                    </center>
+                </a>
+            </div> <!-- list-box -->
+        </div><!-- rs-content -->
+    </div> <!-- random-spotlight -->
+    {% endfor %}
+
+</div> <!-- container -->
+{% endblock %}
