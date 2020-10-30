@@ -1,8 +1,8 @@
 # CPSC 349 Project One
 
-## Listo
+## Quickboard
 
-Listo allows users to create simple lists about anything the think is worth sharing with the world. Users create subjects and list off things pertaining to that specific subject.
+Quickboard allows users to create simple lists about anything the think is worth sharing with the world. Users create subjects and list off things pertaining to that specific subject.
 
 
 ## Install
